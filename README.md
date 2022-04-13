@@ -27,21 +27,21 @@ $ mv shape_predictor_68_face_landmarks.dat active_listening/feature_extraction/
 
 ## Data Preparation
 
-The feature extraction and training scripts work on video-based conversation datasets. The expected format is a directory of mp4 video files where each video is of a distinct interaction with a single speaker and a single listener. Additionally, the directory should contain an `index.csv` file with rows for each interaction and three columns: 
+The feature extraction and training scripts work on video-based dyadic conversation datasets. The expected format is a directory of mp4 video files where each video is of a distinct interaction with a single speaker. Accompanying each mp4 video file is an  [ANVIL](https://www.anvil-software.org/) annotation file indicating when the listener nodded during the interaction. Additionally, the directory should contain an `index.csv` file with rows for each interaction and three columns: 
 
-- `interaction_id` - where `{interaction_id}.mp4` is the name of the interaction video file.
-- `speaker_id` - a unique integer ID for the speaker in the video
-- `listener_id` - a unique integer ID for the listener in the video
+- `interaction_id` - where `{interaction_id}_s.mp4` is the name of a video file of the speaker during the interaction.
+- `speaker_id` - a unique integer ID for the speaker in the interaction
+- `listener_id` - a unique integer ID for the listener in the interaction
 
 ### Preprocessing Videos
 
-For each `{interaction_id}.mp4` file there should be an accompanying `{interaction_id}.wav` file.
+For each `{interaction_id}_s.mp4` file there should be an accompanying `{interaction_id}_s.wav` file.
 
 We provide the `scripts/preprocess_video.sh` script to automatically extract a .wav file from each .mp4 file in your data directory.
 
 ### Annotating Videos
 
-For each `{interaction_id}.mp4` file there should be an accompanying `{interaction_id}.anvil` [ANVIL](https://www.anvil-software.org/) annotation file.
+For each `{interaction_id}_s.mp4` file there should be an accompanying `{interaction_id}_l.anvil` [ANVIL](https://www.anvil-software.org/) annotation file which contains 
 
 The annotation file requires only a single track named `nod`. Each element in the track should have a `start` and `end` attribute indicating the start and end times of each nod in the video. The annotation file can also optionally contain a track named `session` indicating the start and end times of the relevant interaction in the video.
 

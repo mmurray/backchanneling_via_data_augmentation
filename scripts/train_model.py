@@ -109,11 +109,10 @@ if __name__ == "__main__":
     random.shuffle(splits)
 
     all_results = []
-    for split, (train_idx, val_test_idx) in enumerate(splits):
-        held_out_speakers = np.unique(speaker_list[val_test_idx])
-        held_out_groups = np.unique(groups[val_test_idx])
+    for split, (train_idx, val_idx) in enumerate(splits):
+        held_out_speakers = np.unique(speaker_list[val_idx])
+        held_out_groups = np.unique(groups[val_idx])
 
-        val_idx = val_test_idx[groups[val_test_idx] == held_out_groups[0]]
         print("held out speakers: {}".format(held_out_speakers))
 
         val_sessions = np.array(index['interaction_id'][val_idx])
